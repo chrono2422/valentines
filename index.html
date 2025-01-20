@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will you be My Valentine?</title>
+    <title>Be My Valentine?</title>
     <style>
         body {
             margin: 0;
@@ -16,18 +16,19 @@
             font-family: 'Arial', sans-serif;
         }
 
+        .container {
+            position: relative;
+        }
+
         .envelope {
             width: 200px;
             height: 150px;
             background: #ff4d4d;
             position: relative;
-            transform: scale(1);
             cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             border-radius: 5px;
+            transition: transform 0.5s ease-in-out;
+            transform-origin: center;
         }
 
         .envelope:hover {
@@ -48,6 +49,7 @@
             left: 0;
             border-width: 0 100px 75px 100px;
             border-color: transparent transparent #ff6666 transparent;
+            z-index: 2;
         }
 
         .envelope:after {
@@ -68,6 +70,7 @@
             text-align: center;
             border-radius: 10px;
             z-index: 2;
+            animation: slideIn 1s ease-out forwards;
         }
 
         .letter h1 {
@@ -96,24 +99,49 @@
         .btn:hover {
             background-color: #e63939;
         }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="envelope" onclick="openLetter()">
-        <span style="color: white; font-weight: bold;">Open Me</span>
-    </div>
+    <div class="container">
+        <!-- Envelope -->
+        <div class="envelope" onclick="openLetter()">
+            <span style="color: white; font-weight: bold; position: absolute; z-index: 3;">Open Me</span>
+        </div>
 
-    <div class="letter">
-        <h1>Will You Be My Valentine?</h1>
-        <div class="heart">❤️</div>
-        <p>I have to ask because you make me fall for you more and more everyday! Would you do me the honor of being my Valentine?</p>
-        <a class="btn" href="valentine_thank_you.html">Yes, I’d love to!</a>
+        <!-- Letter -->
+        <div class="letter">
+            <h1>Will You Be My Valentine?</h1>
+            <div class="heart">❤️</div>
+            <p>I couldn’t help but ask because you make every day special! Would you do me the honor of being my Valentine?</p>
+            <a class="btn" href="valentine_thank_you.html">Yes, I’d love to!</a>
+        </div>
     </div>
 
     <script>
         function openLetter() {
-            document.querySelector('.envelope').style.display = 'none';
-            document.querySelector('.letter').style.display = 'block';
+            const envelope = document.querySelector('.envelope');
+            const letter = document.querySelector('.letter');
+
+            // Add animation to envelope (scale down and fade out)
+            envelope.style.transform = 'scale(0.8)';
+            envelope.style.opacity = '0';
+
+            // Wait for envelope to "disappear" before showing the letter
+            setTimeout(() => {
+                envelope.style.display = 'none';
+                letter.style.display = 'block';
+            }, 500); // 500ms matches the envelope transition
         }
     </script>
 </body>
