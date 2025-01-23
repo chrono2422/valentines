@@ -20,6 +20,7 @@
         .message {
             text-align: center;
             z-index: 2;
+            position: relative;
         }
 
         .message h1 {
@@ -35,56 +36,89 @@
 
         .flowers {
             position: absolute;
-            bottom: -100px;
-            animation: rise 4s ease-out infinite alternate;
-        }
-
-        @keyframes rise {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(-50px);
-            }
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
         }
 
         .flower {
             width: 50px;
             height: 50px;
+            background-color: pink;
             position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: float 4s infinite ease-in-out, riseUp 5s ease-in forwards;
+        }
+
+        .flower::before,
+        .flower::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
             background-color: pink;
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            animation: float 4s infinite ease-in-out;
         }
 
-        .flower:nth-child(1) {
-            left: 20%;
-            animation-delay: 0s;
+        .flower::before {
+            top: -10px;
+            left: 15px;
         }
 
-        .flower:nth-child(2) {
-            left: 40%;
-            animation-delay: 1s;
-        }
-
-        .flower:nth-child(3) {
-            left: 60%;
-            animation-delay: 2s;
-        }
-
-        .flower:nth-child(4) {
-            left: 80%;
-            animation-delay: 3s;
+        .flower::after {
+            top: 15px;
+            left: -10px;
         }
 
         @keyframes float {
             0%, 100% {
-                transform: translateY(0) rotate(0);
+                transform: translateX(0) rotate(0deg);
             }
             50% {
-                transform: translateY(-20px) rotate(20deg);
+                transform: translateX(20px) rotate(15deg);
             }
+        }
+
+        @keyframes riseUp {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10%);
+                opacity: 0;
+            }
+        }
+
+        /* Position the flowers randomly */
+        .flower:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .flower:nth-child(2) {
+            left: 30%;
+            animation-delay: 1s;
+        }
+
+        .flower:nth-child(3) {
+            left: 50%;
+            animation-delay: 2s;
+        }
+
+        .flower:nth-child(4) {
+            left: 70%;
+            animation-delay: 3s;
+        }
+
+        .flower:nth-child(5) {
+            left: 90%;
+            animation-delay: 4s;
         }
     </style>
 </head>
@@ -94,6 +128,7 @@
         <p>You’ve made my day so much brighter! 🌹</p>
     </div>
     <div class="flowers">
+        <div class="flower"></div>
         <div class="flower"></div>
         <div class="flower"></div>
         <div class="flower"></div>
