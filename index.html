@@ -14,6 +14,7 @@
             justify-content: center;
             height: 100vh;
             font-family: 'Arial', sans-serif;
+            overflow: hidden;
         }
 
         .container {
@@ -62,6 +63,9 @@
         .letter {
             display: none;
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: #fff;
             width: 300px;
             height: 400px;
@@ -103,11 +107,11 @@
         @keyframes slideIn {
             0% {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translate(-50%, calc(-50% - 50px));
             }
             100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translate(-50%, -50%);
             }
         }
     </style>
@@ -116,12 +120,12 @@
     <div class="container">
         <!-- Envelope -->
         <div class="envelope" onclick="openLetter()">
-            <span style="color: white; font-weight: bold; position: absolute; z-index: 3;">Click on me</span>
+            <span style="color: white; font-weight: bold; position: absolute; z-index: 3;">Open Me</span>
         </div>
 
         <!-- Letter -->
         <div class="letter">
-            <h1>Will You Be My Valentine?</h1>
+            <h1>Will You Please Be My Valentine?</h1>
             <div class="heart">❤️</div>
             <p>I have to ask because you make me fall for you more and more everyday! Would you do me the honor of being my Valentine?</p>
             <a class="btn" href="valentine_thank_you.html">Yes, I’d love to!</a>
